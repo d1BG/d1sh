@@ -1,4 +1,5 @@
-mod tokens;
+mod tokenizer;
+mod interpreter;
 
 use std::io;
 use std::io::Write;
@@ -14,17 +15,8 @@ fn main() {
             continue;
         }
 
-        let input = input.trim();
+        let input = input.trim(); // remove \n char
 
-        if input.is_empty() {
-            continue;
-        }
-
-        if input == "exit" {
-            break;
-        }
-
-        let tokens = tokens::tokenize(input);
-        println!("{:?}", tokens);
+        interpreter::interpret(tokenizer::tokenize(input));
     }
 }
