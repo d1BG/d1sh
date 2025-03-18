@@ -1,2 +1,2 @@
 # d1sh
-shell written in Rust
+🚀 Blazingly 🔥 fast ⚡ shell written in Rust 🦀
