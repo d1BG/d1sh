@@ -7,9 +7,10 @@ use gethostname::gethostname;
 
 fn main() {
     loop {
+        env::set_var("HOST", gethostname().to_str().unwrap());
         print!("[{}@{}] {} d1sh> ",
                env::var("USER").unwrap(),
-               gethostname().to_str().unwrap(),
+               env::var("HOST").unwrap(),
                env::current_dir().unwrap().display());
 
         io::stdout().flush().unwrap();
