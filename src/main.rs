@@ -3,10 +3,15 @@ mod interpreter;
 
 use std::{env, io};
 use std::io::Write;
+use gethostname::gethostname;
 
 fn main() {
     loop {
-        print!("{:?} d1sh> ",env::current_dir().unwrap());
+        print!("[{}@{}] {} d1sh> ",
+               env::var("USER").unwrap(),
+               gethostname().to_str().unwrap(),
+               env::current_dir().unwrap().display());
+
         io::stdout().flush().unwrap();
         let mut input = String::new();
 
