@@ -1,3 +1,4 @@
+use std::env;
 use std::process::exit;
 
 pub(crate) fn interpret(tokens: Vec<String>) {
@@ -9,6 +10,7 @@ pub(crate) fn interpret(tokens: Vec<String>) {
 
     match tokens[0].as_str() {
         "exit" => exit(0),
+        "pwd" => println!("{}", env::current_dir().unwrap().display()),
         _ => {}
     }
 }
