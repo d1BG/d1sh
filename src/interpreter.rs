@@ -15,7 +15,7 @@ pub(crate) fn interpret(tokens: Vec<String>) {
             if tokens.len() == 2 {
                 env::set_current_dir(&*tokens[1]).unwrap();
             } else if tokens.len() == 1 {
-                env::set_current_dir("/").unwrap();
+                env::set_current_dir(env::var("HOME").unwrap()).unwrap();
             } else if tokens.len() > 2 {
                 println!("Invalid arguments!");
             }
