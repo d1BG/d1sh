@@ -1,12 +1,12 @@
 mod tokenizer;
 mod interpreter;
 
-use std::io;
+use std::{env, io};
 use std::io::Write;
 
 fn main() {
     loop {
-        print!("d1sh> ");
+        print!("{:?} d1sh> ",env::current_dir().unwrap());
         io::stdout().flush().unwrap();
         let mut input = String::new();
 
