@@ -24,7 +24,11 @@ pub(crate) fn interpret(tokens: Vec<String>) {
                 .output()
                 .expect(format!("Failed to execute command: {}", tokens[0]).as_str());
 
-            println!("{}", String::from_utf8_lossy(&com.stdout));
+            if com.status.success() {
+                println!("{}", String::from_utf8_lossy(&com.stdout));
+            } else {
+                println!("{}\n{}",com.status ,String::from_utf8_lossy(&com.stderr));
+            }
         }
     }
 }
