@@ -23,6 +23,6 @@ fn main() {
 
         let input = input.trim(); // remove \n char
 
-        interpreter::interpret(tokenizer::tokenize(input));
+        match interpreter::interpret(tokenizer::tokenize(input)){ _ => {} }
     }
 }
