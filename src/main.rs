@@ -6,14 +6,14 @@ use std::io::Write;
 use gethostname::gethostname;
 
 fn main() {
-    let hostname = gethostname().to_str().unwrap();
+    let hostname = gethostname().to_str().unwrap().to_string();
     let user = env::var("USER").unwrap();
 
-    env::set_var("HOST", hostname);
+    env::set_var("HOST", hostname.clone());
 
     loop {
         print!("[{user}@{hostname}] {} d1sh> ",
-               env::current_dir().unwrap().display());
+                env::current_dir().unwrap().display());
 
         io::stdout().flush().unwrap();
         let mut input = String::new();
