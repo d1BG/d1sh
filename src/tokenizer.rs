@@ -1,3 +1,5 @@
+use std::env;
+
 pub(crate) fn tokenize(input : &str) -> Vec<String> {
     let mut tokens = Vec::new();
     let mut curr_token = String::new();
@@ -19,8 +21,12 @@ pub(crate) fn tokenize(input : &str) -> Vec<String> {
                 c if in_quotes && c == quoted_char => {
                     in_quotes = false;
                 }
-                ' ' if !in_quotes => {
-                    if !curr_token.is_empty() {
+                ' ' if !in_quotes && !curr_token.is_empty() => {
+                    if curr_token.to_string().starts_with('$') {
+                        let envvar = env::var(curr_token.clone().strip_prefix('$').unwrap().to_string()).unwrap();
+                        tokens.push(envvar);
+                        curr_token.clear();
+                    } else {
                         tokens.push(curr_token.clone());
                         curr_token.clear();
                     }
@@ -29,8 +35,10 @@ pub(crate) fn tokenize(input : &str) -> Vec<String> {
             }
         }
     }
-
-    if !curr_token.is_empty() {
+    if !curr_token.is_empty() && !in_quotes && curr_token.to_string().starts_with('$') {
+        let envvar = env::var(curr_token.clone().strip_prefix('$').unwrap().to_string()).unwrap();
+        tokens.push(envvar);
+    } else if !curr_token.is_empty() {
         tokens.push(curr_token);
     }
 
