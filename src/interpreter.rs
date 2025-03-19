@@ -12,12 +12,10 @@ pub(crate) fn interpret(tokens: Vec<String>) {
         "exit" => exit(0),
         "pwd" => println!("{}", env::current_dir().unwrap().display()),
         "cd" => {
-            if tokens.len() == 2 {
-                env::set_current_dir(&*tokens[1]).unwrap();
-            } else if tokens.len() == 1 {
-                env::set_current_dir(env::var("HOME").unwrap()).unwrap();
-            } else if tokens.len() > 2 {
-                println!("Invalid arguments!");
+            match tokens.len() {
+                1 => env::set_current_dir(env::var("HOME").unwrap()).unwrap(),
+                2 => env::set_current_dir(&*tokens[1]).unwrap(),
+                _ => println!("Invalid arguments!")
             }
         },
         _ => {}
