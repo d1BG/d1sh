@@ -6,11 +6,13 @@ use std::io::Write;
 use gethostname::gethostname;
 
 fn main() {
+    let hostname = gethostname().to_str().unwrap();
+    let user = env::var("USER").unwrap();
+
+    env::set_var("HOST", hostname);
+
     loop {
-        env::set_var("HOST", gethostname().to_str().unwrap());
-        print!("[{}@{}] {} d1sh> ",
-               env::var("USER").unwrap(),
-               env::var("HOST").unwrap(),
+        print!("[{user}@{hostname}] {} d1sh> ",
                env::current_dir().unwrap().display());
 
         io::stdout().flush().unwrap();
