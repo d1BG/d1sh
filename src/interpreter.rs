@@ -1,5 +1,5 @@
 use std::env;
-use std::process::exit;
+use std::process::{exit, Command};
 
 pub(crate) fn interpret(tokens: Vec<String>) {
     println!("{:?}", tokens);
@@ -18,6 +18,11 @@ pub(crate) fn interpret(tokens: Vec<String>) {
                 _ => println!("Invalid arguments!")
             }
         },
-        _ => {}
+        _ => {
+            let com = Command::new(&tokens[0]).output()
+                .expect(format!("Failed to execute command: {}", tokens[0]).as_str());
+
+            println!("{}", String::from_utf8_lossy(&com.stdout));
+        }
     }
 }
