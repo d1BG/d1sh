@@ -19,7 +19,9 @@ pub(crate) fn interpret(tokens: Vec<String>) {
             }
         },
         _ => {
-            let com = Command::new(&tokens[0]).output()
+            let com = Command::new(&tokens[0])
+                .args(tokens[1..].to_vec())
+                .output()
                 .expect(format!("Failed to execute command: {}", tokens[0]).as_str());
 
             println!("{}", String::from_utf8_lossy(&com.stdout));
