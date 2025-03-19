@@ -1,5 +1,5 @@
 use std::env;
-use std::process::{exit, Command};
+use std::process::{exit, Command, Stdio};
 
 pub(crate) fn interpret(tokens: Vec<String>) -> Result<i32, String> {
     println!("{:?}", tokens);
@@ -35,18 +35,20 @@ pub(crate) fn interpret(tokens: Vec<String>) -> Result<i32, String> {
             }
         },
         _ => {
-            let mut cmd = Command::new(&tokens[0])
-                .args(tokens[1..].to_vec()).output();
+            let cmd = Command::new(&tokens[0])
+                .args(tokens[1..].to_vec())
+                .stdout(Stdio::inherit())
+                .stderr(Stdio::inherit())
+                .stdin(Stdio::inherit())
+                .output();
+
             match cmd {
-                Ok(output) => {cmd = Ok(output)}
+                Ok(_) => {Ok(0)}
                 Err(e) => {
                     println!("{}", e);
                     return Err(format!("{}", e));
                 }
             }
-
-            print!("{}", String::from_utf8_lossy(cmd.unwrap().stdout.as_slice()));
-            Ok(0)
         }
     }
 }
