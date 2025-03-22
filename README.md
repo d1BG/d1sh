@@ -17,7 +17,7 @@ d1sh is a 🚀 **blazingly** 🔥 **fast** ⚡ modern shell alternative written 
 ### Installation 🔧
 ```bash
 # Clone the repository
-git clone https://github.com/username/d1sh.git
+git clone https://github.com/d1bg/d1sh.git
 
 # Change to project directory
 cd d1sh
