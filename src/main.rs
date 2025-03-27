@@ -7,7 +7,9 @@ use gethostname::gethostname;
 
 fn main() {
     let hostname = gethostname().to_str().unwrap().to_string();
-    let user = env::var("USER").unwrap();
+    let user = env::var("USER") // Unix-like systems
+        .or_else(|_| env::var("USERNAME")) // Windows
+        .unwrap_or_else(|_| "d1sh".to_string());
 
     env::set_var("HOST", hostname.clone());
 
