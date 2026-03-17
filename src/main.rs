@@ -36,7 +36,11 @@ fn main() {
         let input = input.trim(); // remove \n char
 
         let interpreter = Interpreter::new();
-        match interpreter.run(tokenize(input)){
+        let tokenized = tokenize(input);
+        
+        println!("{:?}", tokenized);
+
+        match interpreter.run(tokenized){
             Ok(_result) => {}
             Err(err) => {
                 eprintln!("{}", err);
