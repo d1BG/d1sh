@@ -12,9 +12,9 @@ use std::{
 
 use std::collections::HashMap;
 use crate::commands::Command;
-use crate::commands::cd_command::CdCommand;
-use crate::commands::exit_command::ExitCommand;
-use crate::commands::pwd_command::PwdCommand;
+use crate::commands::cd::CdCommand;
+use crate::commands::exit::ExitCommand;
+use crate::commands::pwd::PwdCommand;
 
 pub struct Interpreter {
     commands: HashMap<String, Box<dyn Command>>,
