@@ -35,10 +35,7 @@ pub(crate) fn tokenize(input : &str) -> Vec<String> {
             }
         }
     }
-    if !curr_token.is_empty() && !in_quotes && curr_token.to_string().starts_with('$') {
-        let envvar = env::var(curr_token.clone().strip_prefix('$').unwrap().to_string()).unwrap();
-        tokens.push(envvar);
-    } else if !curr_token.is_empty() {
+    if !curr_token.is_empty() {
         tokens.push(curr_token);
     }
 
