@@ -1,9 +1,12 @@
 mod tokenizer;
 mod interpreter;
+mod commands;
 
 use std::{env, io};
 use std::io::Write;
 use gethostname::gethostname;
+use crate::interpreter::Interpreter;
+use crate::tokenizer::tokenize;
 
 fn main() {
     let hostname = gethostname().to_str().unwrap().to_string();
@@ -31,6 +34,14 @@ fn main() {
         }
 
         let input = input.trim(); // remove \n char
-        match interpreter::interpret(tokenizer::tokenize(input)){ _ => {} }
+
+        let interpreter = Interpreter::new();
+        match interpreter.run(tokenize(input)){
+            Ok(_result) => {}
+            Err(err) => {
+                eprintln!("{}", err);
+            }
+        }
+
     }
 }
