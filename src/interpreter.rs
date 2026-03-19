@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use crate::commands::Command;
 use crate::commands::cd::CdCommand;
 use crate::commands::exit::ExitCommand;
+use crate::commands::export::ExportCommand;
 use crate::commands::pwd::PwdCommand;
 use crate::commands::r#false::FalseCommand;
 use crate::commands::r#true::TrueCommand;
@@ -22,6 +23,7 @@ impl Interpreter {
         commands.insert(String::from("false"), Box::new(FalseCommand));
         commands.insert(String::from("true"), Box::new(TrueCommand));
         commands.insert(String::from("which"), Box::new(WhichCommand));
+        commands.insert(String::from("export"), Box::new(ExportCommand));
 
         Self { commands }
     }
