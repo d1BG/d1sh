@@ -36,10 +36,9 @@ fn parse_argument(arg: String) -> Result<(String, String), String> {
     let key = key_value.get(0).map(|s| s.as_str()).unwrap_or("").to_string();
     let value = key_value.get(1).map(|s| s.as_str()).unwrap_or("").to_string();
 
-    if (key.is_empty() || value.is_empty() || key.starts_with(|c: char| c.is_ascii_digit())) {
+    if (key.is_empty() || key.starts_with(|c: char| c.is_ascii_digit())) {
         return Err("invalid argument".to_string());
     }
-
 
     for c in key.chars() {
         match c {
