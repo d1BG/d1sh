@@ -1,6 +1,7 @@
 mod tokenizer;
 mod interpreter;
 mod commands;
+mod forker;
 
 use std::{env, io};
 use std::error::Error;
