@@ -1,4 +1,3 @@
-use std::process::ExitCode;
 use crate::commands::Command;
 
 pub struct FalseCommand;
