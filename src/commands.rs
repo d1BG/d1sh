@@ -4,6 +4,7 @@ pub mod exit;
 pub mod export;
 pub mod r#false;
 pub mod r#true;
+pub mod which;
 
 pub trait Command {
     fn execute(&self, tokens: Vec<String>) -> Result<i32, String>;

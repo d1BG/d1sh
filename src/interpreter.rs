@@ -17,6 +17,7 @@ use crate::commands::exit::ExitCommand;
 use crate::commands::pwd::PwdCommand;
 use crate::commands::r#false::FalseCommand;
 use crate::commands::r#true::TrueCommand;
+use crate::commands::which::WhichCommand;
 
 pub struct Interpreter {
     commands: HashMap<String, Box<dyn Command>>,
@@ -31,6 +32,7 @@ impl Interpreter {
         commands.insert(String::from("pwd"), Box::new(PwdCommand));
         commands.insert(String::from("false"), Box::new(FalseCommand));
         commands.insert(String::from("true"), Box::new(TrueCommand));
+        commands.insert(String::from("which"), Box::new(WhichCommand));
 
         Self { commands }
     }
