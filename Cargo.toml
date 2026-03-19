@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-gethostname = "=1.0.0"
 nix = { version = "0.31.2", features = ["fs", "process", "signal", "term"] }
 search_path = "0.1.4"
 signal-hook = "0.4.3"
+whoami = "2.1.1"
