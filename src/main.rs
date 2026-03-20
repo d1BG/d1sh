@@ -2,20 +2,16 @@ mod tokenizer;
 mod interpreter;
 mod commands;
 mod forker;
+mod print_prompt;
 
-use std::{env, io};
+use std::io;
 use std::error::Error;
 use std::io::Write;
-use whoami::{hostname, username};
 use crate::interpreter::Interpreter;
 use crate::tokenizer::tokenize;
 fn main() -> Result<(), Box<dyn Error>> {
-    let hostname = hostname().unwrap_or_else(|_| "hostname".to_string());
-    let user = username().unwrap_or_else(|_| "username".to_string());
-
     loop {
-        print!("[{user}@{hostname}] {} d1sh> ",
-                env::current_dir()?.display());
+        print_prompt::print_prompt();
 
         io::stdout().flush()?;
         let mut input = String::new();
