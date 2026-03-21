@@ -27,7 +27,8 @@ pub fn run_command(tokens: Vec<String>) -> Result<i32, String> {
                 eprintln!("exec failed: {}", e);
                 exit(1);
             });
-            Ok(0)
+            #[allow(unused)]
+            Ok(0) // make compiler happy
         }
         Ok(ForkResult::Parent { child }) => {
             let _ = setpgid(child, child); // Ensure child is in its own process group
